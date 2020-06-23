@@ -30,11 +30,6 @@ class ConfigService {
 const configService = new ConfigService(process.env)
   .ensureValues([
     'API_URL',
-    'API_PORT',
-    'DB_HOST',
-    'DB_PORT',
-    'DB_USER',
-    'DB_NAME',
     'JWT_SECRET'
   ]);
 
