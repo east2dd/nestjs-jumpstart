@@ -5,7 +5,7 @@ import { UserRepository } from './user.repository'
 import { User } from './user.entity'
 import { Request } from '../../common/request'
 import { createRequest } from 'node-mocks-http'
-import { factory } from './user.factory'
+import { factories } from '../../spec/factories'
 
 require('dotenv').config()
 
@@ -14,7 +14,7 @@ describe('UserController', () => {
   let userService: UserService
   let userServiceFindSpy
 
-  const mockUser = new User({ balance: 30 })
+  const mockUser = factories.user.build()
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -33,7 +33,7 @@ describe('UserController', () => {
   })
 
   describe('me', () =>{
-    const currentUser: User = factory.build('user')
+    const currentUser: User = factories.user.build()
 
     describe('When token is not valid', () => {
       it('should return bad request exception', async ()=>{
