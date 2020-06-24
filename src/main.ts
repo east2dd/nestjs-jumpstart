@@ -3,18 +3,18 @@ import { AppModule } from './app.module'
 import { initSwagger } from './swagger'
 import { ValidationPipe } from '@nestjs/common'
 
-const PORT = Number(process.env.PORT) || 8080;
+const PORT = Number(process.env.PORT) || 8080
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule)
 
-  app.enableCors();
-  app.setGlobalPrefix('api');
-  app.useGlobalPipes(new ValidationPipe());
+  app.enableCors()
+  app.setGlobalPrefix('api')
+  app.useGlobalPipes(new ValidationPipe())
 
-  initSwagger(app);
+  initSwagger(app)
 
-  await app.listen(PORT, '0.0.0.0');
+  await app.listen(PORT, '0.0.0.0')
 }
 
-bootstrap();
+bootstrap()

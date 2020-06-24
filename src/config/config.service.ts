@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config()
 
 class ConfigService {
 
@@ -15,15 +15,15 @@ class ConfigService {
   }
 
   public getValues(keys: string[]) {
-    keys.forEach(k => this.getValue(k, ""));
+    keys.forEach(k => this.getValue(k, ""))
 
-    return this;
+    return this
   }
 
   public ensureValues(keys: string[]) {
-    keys.forEach(k => this.getValue(k));
+    keys.forEach(k => this.getValue(k))
 
-    return this;
+    return this
   }
 }
 
@@ -31,6 +31,6 @@ const configService = new ConfigService(process.env)
   .ensureValues([
     'API_URL',
     'JWT_SECRET'
-  ]);
+  ])
 
-export { configService };
+export { configService }

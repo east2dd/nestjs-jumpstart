@@ -1,5 +1,5 @@
-import { User } from './user.entity';
-export const factory = require('factory-girl').factory;
+import { User } from './user.entity'
+export const factory = require('factory-girl').factory
 
 factory.define('user', User,
   {

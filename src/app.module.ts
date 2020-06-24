@@ -1,10 +1,10 @@
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule } from '@nestjs/config';
-import { TYPE_ORM_MODULE_OPTIONS } from './config/database';
-import { UserModule } from './app/user/user.module';
+import { Module } from '@nestjs/common'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { ConfigModule } from '@nestjs/config'
+import { TYPE_ORM_MODULE_OPTIONS } from './config/database'
+import { UserModule } from './app/user/user.module'
 import { RouterModule, Routes } from 'nest-router'
-import { AuthModule } from './app/auth/auth.module';
+import { AuthModule } from './app/auth/auth.module'
 
 const routes: Routes = [
   {
@@ -20,7 +20,7 @@ const routes: Routes = [
       },
     ]
   }
-];
+]
 
 @Module({
   imports: [

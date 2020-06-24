@@ -1,12 +1,12 @@
-import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
-import { configService } from './config.service';
+import { TypeOrmModuleOptions } from '@nestjs/typeorm'
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies'
+import { configService } from './config.service'
 import * as path from 'path'
-import * as PostgressConnectionStringParser from "pg-connection-string";
+import * as PostgressConnectionStringParser from "pg-connection-string"
 
 const getOptionsFromConnectionString = (): TypeOrmModuleOptions => {
-  const databaseUrl: string = process.env.DATABASE_URL;
-  const connectionOptions = PostgressConnectionStringParser.parse(databaseUrl);
+  const databaseUrl: string = process.env.DATABASE_URL
+  const connectionOptions = PostgressConnectionStringParser.parse(databaseUrl)
 
   return {
     type: "postgres",

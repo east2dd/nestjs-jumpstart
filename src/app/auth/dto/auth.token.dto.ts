@@ -1,5 +1,5 @@
-import { IsString, IsJWT } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
+import { IsString, IsJWT } from 'class-validator'
+import { ApiProperty } from '@nestjs/swagger'
 
 export class AuthTokenDto {
   @ApiProperty({
@@ -8,12 +8,12 @@ export class AuthTokenDto {
   })
   @IsString()
   @IsJWT()
-  public readonly token: string;
+  public readonly token: string
 
   @ApiProperty({
     name: 'uid',
     description: 'User ID of the logged in user',
   })
   @IsString()
-  public readonly uid: string;
+  public readonly uid: string
 }
