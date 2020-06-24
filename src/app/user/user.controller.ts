@@ -20,6 +20,6 @@ export class UserController {
   @Get('me')
   @ApiOperation({ description: 'Get user profile' })
   public async me(@Req() req: Request) {
-    return req.user || {};
+    return this.userService.find(req.user.id)
   }
 }
