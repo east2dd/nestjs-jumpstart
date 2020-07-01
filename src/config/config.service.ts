@@ -14,10 +14,8 @@ class ConfigService {
     return value || defaultValue
   }
 
-  public getValues(keys: string[]) {
-    keys.forEach(k => this.getValue(k, ""))
-
-    return this
+  public getValues(keys: string[]): string[] {
+    return keys.map(k => this.getValue(k, ""))
   }
 
   public ensureValues(keys: string[]) {
