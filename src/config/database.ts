@@ -4,8 +4,7 @@ import { configService } from './config.service'
 import * as path from 'path'
 import * as PostgressConnectionStringParser from "pg-connection-string"
 
-const getOptionsFromConnectionString = (): TypeOrmModuleOptions => {
-  const databaseUrl: string = process.env.DATABASE_URL
+const buildOptionsFromConnectionString = (databaseUrl: string): TypeOrmModuleOptions => {
   const connectionOptions = PostgressConnectionStringParser.parse(databaseUrl)
 
   return {
@@ -21,7 +20,7 @@ const getOptionsFromConnectionString = (): TypeOrmModuleOptions => {
   }
 }
 
-const getOptionsFromEnvironment = () :TypeOrmModuleOptions => {
+const buildOptionsFromDbVariables = () :TypeOrmModuleOptions => {
   return {
     type: 'postgres',
     host: configService.getValue('DB_HOST'),
@@ -32,18 +31,18 @@ const getOptionsFromEnvironment = () :TypeOrmModuleOptions => {
   }
 }
 
-const getOptions = () :TypeOrmModuleOptions => {
-  if (process.env.DATABASE_URL) { return getOptionsFromConnectionString() }
+const buildOptions = () :TypeOrmModuleOptions => {
+  if (process.env.DATABASE_URL) {
+    return buildOptionsFromConnectionString(process.env.DATABASE_URL)
+  }
 
-  return getOptionsFromEnvironment() 
+  return buildOptionsFromDbVariables() 
 }
 
 export const TYPE_ORM_MODULE_OPTIONS: TypeOrmModuleOptions = Object.assign(
-  getOptions(),
+  buildOptions(),
   {
     namingStrategy: new SnakeNamingStrategy(),
     entities: [path.join(__dirname, '../**', '*.entity{.ts,.js}')],
   }
 )
-
-console.log(TYPE_ORM_MODULE_OPTIONS)
