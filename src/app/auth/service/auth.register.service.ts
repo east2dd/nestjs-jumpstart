@@ -17,8 +17,10 @@ export default class AuthRegisterService
   constructor(private userRepository: Repository<User>) {}
 
   async call(params: AuthRegisterDto): Promise<User> {
-    this.ensureUserNotExist(params.email)
-
+    const isUserExist = await this.ensureUserNotExist(params.email)
+    if (isUserExist) {
+      throw new UserDuplicatedEmailException('A User with that email already exists')
+    }
     const { password, ...userParams } = params
     const passwordHash = await this.generatePasswordHash(password)
 
@@ -27,12 +29,13 @@ export default class AuthRegisterService
     return await this.userRepository.save(user)
   }
 
-  protected async ensureUserNotExist(email: string) {
+  protected async ensureUserNotExist(email: string): Promise<boolean> {
     const existingUser = await this.userRepository.findOne({ email: email })
 
     if (existingUser) {
-      throw new UserDuplicatedEmailException('A User with that email already exists')
+      return true;
     }
+    return false;
   }
 
   protected async generatePasswordHash(password: string) {
